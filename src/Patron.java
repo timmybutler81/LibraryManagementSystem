@@ -1,3 +1,11 @@
+/**
+ * Timothy Butler
+ * CEN 3024C - Software Development 1
+ * May 16, 2025,
+ * Patron.java
+ * This class is used to create the patron object that will be stored in memory for all patrons created
+ */
+
 public class Patron {
     private final int id;
     private final String name;

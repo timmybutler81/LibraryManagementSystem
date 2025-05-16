@@ -1,3 +1,12 @@
+/**
+ * Timothy Butler
+ * CEN 3024C - Software Development 1
+ * May 16, 2025,
+ * LibrarySystem.java
+ * This class is where the main crud operations happen. The goal is abstraction from the main method and
+ * this class can be instantiated from main to perform these functions.
+ */
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,13 +18,27 @@ public class LibrarySystem {
     List<Patron> patronList = new ArrayList<>();
     Validator validator = new Validator();
 
+    /**
+     * method: addPatron
+     * parameters: id, name, address, overdueFine
+     * return: void
+     * purpose: adds a patron object to the patronList
+     */
     public void addPatron(int id, String name, String address, double overdueFine) {
 
         Patron patron = new Patron(id, name, address, overdueFine);
         patronList.add(patron);
         System.out.println(patron.toString());
+        System.out.println();
+        displayAllPatrons();
     }
 
+    /**
+     * method: removePatron
+     * parameters: id
+     * return: void
+     * purpose: removes a patron object from the patronList
+     */
     public void removePatron(int id) {
 
         if (findPatronById(id) == null) {
@@ -27,8 +50,16 @@ public class LibrarySystem {
 
         patronList.remove(tempPatron);
         System.out.println("Patron ID: " + id + " has been removed.");
+        System.out.println();
+        displayAllPatrons();
     }
 
+    /**
+     * method: displayAllPatrons
+     * parameters:
+     * return: void
+     * purpose: displays a list of patron objects in patronList
+     */
     public void displayAllPatrons() {
         if (patronList.isEmpty()) {
             System.out.println("No Patrons exist in the system");
@@ -44,6 +75,12 @@ public class LibrarySystem {
 
     }
 
+    /**
+     * method: loadPatronsFromFile
+     * parameters: filePath
+     * return: boolean
+     * purpose: reads a file for data and loads patrons into the patronList
+     */
     public boolean loadPatronsFromFile(String filePath) {
         List<Patron> tempList = new ArrayList<>();
 
@@ -53,7 +90,7 @@ public class LibrarySystem {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] parts = line.split("-");
                 if (parts.length != 4) {
-                    System.out.println("File has incorrect data formatting");
+                    System.out.println("File has incorrect data formatting - missing data");
                     bufferedReader.close();
                     return false;
                 }
@@ -89,6 +126,12 @@ public class LibrarySystem {
 
     }
 
+    /**
+     * method: findPatronById
+     * parameters: id
+     * return: Patron object
+     * purpose: looks up patron by id in the patronList
+     */
     public Patron findPatronById(int id) {
         for (Patron patron : patronList) {
             if (patron.getId() == id) {

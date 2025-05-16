@@ -1,3 +1,14 @@
+/**
+ * Timothy Butler
+ * CEN 3024C - Software Development 1
+ * May 16, 2025,
+ * Main.java
+ * This class is our main program that handles the core logic. The intended behavior is for the user to have
+ * a menu that appears and loops until they exit. They can perform four actions add, remove, display and load from file.
+ * The design is that the main is left minimal and the logic is in displayMenu() and handleUserInput() to keep
+ * the logic broken out.
+ */
+
 import java.util.Scanner;
 
 public class Main {
@@ -10,6 +21,13 @@ public class Main {
         displayMenu();
     }
 
+    /**
+     * method: displayMenu
+     * parameters: none
+     * return: void
+     * purpose: Creates a looped menu that accepts user input on the menu option and sends input
+     * to handleUserInput()
+     */
     public static void displayMenu() {
         int selectedAction = Integer.MIN_VALUE;
         int count = 0;
@@ -37,12 +55,18 @@ public class Main {
             count++;
         }
 
-        //reached when selection isv 5
         System.out.println("Thank you for using the Library Management System. Exiting...");
         scanner.close();
 
     }
 
+    /**
+     * method: handleUserInput
+     * parameters: selection
+     * return: void
+     * purpose: Handles the action taken from the menu options by calling necessary functions to process
+     * the users request
+     */
     public static void handleUserInput(int selection) {
 
         switch (selection) {
@@ -58,13 +82,20 @@ public class Main {
                 librarySystem.displayAllPatrons();
                 break;
             case 4: //load from file
-                System.out.println("Enter the path where you file exists ");
+                System.out.println("Enter the path where your file exists ");
                 String filePath = scanner.nextLine();
                 librarySystem.loadPatronsFromFile(filePath);
                 break;
         }
     }
 
+    /**
+     * method: handleAddPatron
+     * parameters: none
+     * return: void
+     * purpose: Handles the adding of patron on screen prompts to properly loop through options
+     * and validation
+     */
     public static void handleAddPatron() {
         String inputId;
         int id;
